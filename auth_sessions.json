@@ -1,0 +1,20 @@
+{
+  "74e35f61f148b7eb2fdb48df22c9282dc930e0b491d0e806777365aa9614ee0c": {
+    "username": "12",
+    "hwid": "61e55bac-19af-829e-4843-d07661e5",
+    "created_at": "2025-12-07T09:35:06.739779",
+    "expires_at": "2026-12-07T09:35:06.739784"
+  },
+  "341844656c1260fcc6ca8361e9c1b0d45511b63116b99503240d374515707129": {
+    "username": "12",
+    "hwid": "61e55bac-19af-829e-4843-d07661e5",
+    "created_at": "2025-12-07T09:42:37.142675",
+    "never_expires": true
+  },
+  "81e59745094ce192f38f17f58cf8888f199749f06a5c5d8fed22d7c569e692fb": {
+    "username": "jihad",
+    "hwid": "22a101ac-19af-9aeb-50aa-224022a1",
+    "created_at": "2025-12-07T17:18:56.491020",
+    "never_expires": true
+  }
+}
