@@ -2573,8 +2573,8 @@ async def MaiiiinE():
     await connection_pool.initialize()
     
     # Get credentials from environment variables or use defaults
-    Uid = os.environ.get('BOT_UID', '4259639238')
-    Pw = os.environ.get('BOT_PASSWORD', 'JOBAYAR_CODX-ASBNRIJZH')
+    Uid = os.environ.get('BOT_UID', '4297630613')
+    Pw = os.environ.get('BOT_PASSWORD', 'AB164A8F83E50860250F7D57DAC7E7BD39DFB54FD3AACB22C2EB7B0B1DFCBF31')
     print(f"[BOT] Using UID: {Uid}")
     open_id, access_token = await GeNeRaTeAccEss(Uid, Pw)
     if not open_id or not access_token:
