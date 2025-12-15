@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 Admin Panel - Delta Rage Exe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .panel {
+            background: rgba(15, 15, 30, 0.85);
+            border: 2px solid rgba(99, 102, 241, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(20px);
+        }
+        
+        .panel h2 {
+            color: #a5b4fc;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px;
+            background: rgba(15, 15, 35, 0.7);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            color: #e2e8f0;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.6);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .users-table th,
+        .users-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        .users-table th {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            font-weight: 600;
+        }
+        
+        .users-table tr:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .message {
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: none;
+        }
+        
+        .message.success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            color: #10b981;
+            border: 2px solid rgba(16, 185, 129, 0.4);
+        }
+        
+        .message.error {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+            color: #ef4444;
+            border: 2px solid rgba(239, 68, 68, 0.4);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 6px;
+            font-size: 12px;
+            color: #a5b4fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👑 ADMIN PANEL</h1>
+            <p style="color: #94a3b8;">User Management System</p>
+            <div style="margin-top: 15px;">
+                <button class="btn" onclick="window.location.href='/'">🏠 Back to Home</button>
+                <button class="btn btn-danger" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+        
+        <div id="message" class="message"></div>
+        
+        <!-- Create User Panel -->
+        <div class="panel">
+            <h2>➕ Create New User</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="newUsername" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="newPassword" placeholder="Enter password">
+            </div>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 15px;">
+                📱 Device ID will be auto-detected when user first logs in
+            </p>
+            <button class="btn" onclick="createUser()">✨ Create User</button>
+        </div>
+        
+        <!-- Users List Panel -->
+        <div class="panel">
+            <h2>👥 All Users <span class="badge" id="userCount">0</span></h2>
+            <button class="btn" onclick="loadUsers()">🔄 Refresh</button>
+            <table class="users-table" id="usersTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Created At</th>
+                        <th>Last Login</th>
+                        <th>Login Count</th>
+                        <th>Device ID</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersBody">
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: #64748b;">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        function showMessage(type, text) {
+            const msg = document.getElementById('message');
+            msg.className = 'message ' + type;
+            msg.textContent = text;
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 5000);
+        }
+        
+        async function createUser() {
+            const username = document.getElementById('newUsername').value.trim();
+            const password = document.getElementById('newPassword').value.trim();
+            
+            if (!username || !password) {
+                showMessage('error', '❌ Username and password are required!');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/admin/create_user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('success', '✅ ' + data.message);
+                    document.getElementById('newUsername').value = '';
+                    document.getElementById('newPassword').value = '';
+                    loadUsers();
+                } else {
+                    showMessage('error', '❌ ' + data.message);
+                }
+            } catch (e) {
+                showMessage('error', '❌ Connection error: ' + e.message);
+            }
+        }
+        
+        async function loadUsers() {
+            try {
+                const response = await fetch('/admin/list_users');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const tbody = document.getElementById('usersBody');
+                    tbody.innerHTML = '';
+                    
+                    if (data.users.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #64748b;">No users found</td></tr>';
+                    } else {
+                        data.users.forEach(user => {
+                            const deviceDisplay = user.device_id ? `<code>${user.device_id}</code>` : '<span style="color: #94a3b8;">Not registered yet</span>';
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td><strong>${user.username}</strong></td>
+                                <td>${formatDate(user.created_at)}</td>
+                                <td>${formatDate(user.last_login)}</td>
+                                <td>${user.login_count}</td>
+                                <td>${deviceDisplay}</td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="deleteUser('${user.username}')">🗑️ Delete</button>
+                                </td>
+                            `;
+                            tbody.appendChild(tr);
+                        });
+                    }
+                    
+                    document.getElementById('userCount').textContent = data.users.length;
+                } else {
+                    showMessage('error', '❌ ' + data.message);
+                }
+            } catch (e) {
+                showMessage('error', '❌ Connection error: ' + e.message);
+            }
+        }
+        
+        async function deleteUser(username) {
+            if (!confirm(`Are you sure you want to delete user "${username}"?`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('/admin/delete_user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('success', '✅ ' + data.message);
+                    loadUsers();
+                } else {
+                    showMessage('error', '❌ ' + data.message);
+                }
+            } catch (e) {
+                showMessage('error', '❌ Connection error: ' + e.message);
+            }
+        }
+        
+        async function logout() {
+            try {
+                await fetch('/keyauth/logout', { method: 'POST' });
+                window.location.href = '/login';
+            } catch (e) {
+                alert('Logout failed: ' + e.message);
+            }
+        }
+        
+        function formatDate(dateStr) {
+            if (!dateStr) return 'Never';
+            const date = new Date(dateStr);
+            return date.toLocaleString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // Load users on page load
+        loadUsers();
+    </script>
+</body>
+</html>
